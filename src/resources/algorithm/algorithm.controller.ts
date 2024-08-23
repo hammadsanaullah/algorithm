@@ -14,9 +14,9 @@ export class AlgorithmController {
     return this.algorithmService.findAthlete(email);
   }
 
-  @Patch('start-algorithm')
-  update() {
-    return this.algorithmService.update();
+  @Patch('start-algorithm/:athleteId')
+  update(@Param('athleteId') athleteId: string) {
+    return this.algorithmService.update(athleteId);
   }
 
   @Delete('schedule/:athleteId')
