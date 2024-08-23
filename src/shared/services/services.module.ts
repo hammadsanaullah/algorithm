@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { PrismaService } from './prisma/prisma.service';
-import { CronjobsService } from './cronjobs/cronjobs.service';
+// import { CronjobsService } from './cronjobs/cronjobs.service';
 
 @Module({
-  providers: [PrismaService, CronjobsService]
+  providers: [PrismaService]
 })
-export class ServicesModule {}
+export class ServicesModule { }
