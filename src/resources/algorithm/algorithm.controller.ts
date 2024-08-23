@@ -2,33 +2,25 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { AlgorithmService } from './algorithm.service';
 import { CreateAlgorithmDto } from './dto/create-algorithm.dto';
 import { UpdateAlgorithmDto } from './dto/update-algorithm.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('algorithm')
 @Controller('algorithm')
 export class AlgorithmController {
-  constructor(private readonly algorithmService: AlgorithmService) {}
+  constructor(private readonly algorithmService: AlgorithmService) { }
 
-  @Post()
-  create(@Body() createAlgorithmDto: CreateAlgorithmDto) {
-    return this.algorithmService.create(createAlgorithmDto);
+  @Get('athleteId/:email')
+  find(@Param('email') email: string) {
+    return this.algorithmService.findAthlete(email);
   }
 
-  @Get()
-  findAll() {
-    return this.algorithmService.findAll();
+  @Patch('start-algorithm')
+  update() {
+    return this.algorithmService.update();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.algorithmService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAlgorithmDto: UpdateAlgorithmDto) {
-    return this.algorithmService.update(+id, updateAlgorithmDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.algorithmService.remove(+id);
+  @Delete('schedule/:athleteId')
+  remove(@Param('athleteId') athleteId: string) {
+    return this.algorithmService.remove(athleteId);
   }
 }
